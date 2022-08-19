@@ -16,6 +16,5 @@ func handler(ctx context.Context, name MyEvent) (string, error) {
 }
 
 func main() {
-	fmt.Println("In main function.")
 	lambda.Start(handler)
 }
