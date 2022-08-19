@@ -1,0 +1,316 @@
+{
+ "Resources": {
+  "backendapiServiceRole91BDA76A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "GoLambdaStack/backend-api/ServiceRole/Resource"
+   }
+  },
+  "backendapi06863267": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Ref": "AssetParametersc9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6S3Bucket4FE1DEF4"
+     },
+     "S3Key": {
+      "Fn::Join": [
+       "",
+       [
+        {
+         "Fn::Select": [
+          0,
+          {
+           "Fn::Split": [
+            "||",
+            {
+             "Ref": "AssetParametersc9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6S3VersionKey88AB4FDD"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "Fn::Select": [
+          1,
+          {
+           "Fn::Split": [
+            "||",
+            {
+             "Ref": "AssetParametersc9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6S3VersionKey88AB4FDD"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      ]
+     }
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "backendapiServiceRole91BDA76A",
+      "Arn"
+     ]
+    },
+    "Handler": "main",
+    "Runtime": "go1.x"
+   },
+   "DependsOn": [
+    "backendapiServiceRole91BDA76A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "GoLambdaStack/backend-api/Resource",
+    "aws:asset:path": "asset.c9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zWNwQ6CMBBEv4V7WUQNiTeVxLPBL1jblRRom3RbPTT9dynG07yZzO600HYn2FVn/HAt1dwk6TxBegSUs7gwU1hx1HYUvbMcfJRB9C97R4+GAvliBmIXvaTCa0vpoJ3NorxMC5qnQki3aGWJS+fPWWg0kAa3bKdFs+BDjWWWYVtfPVyjnClckSlnYZ0imLh5tx20R9hXE2td+2iDNgTDT7/7yP+p1wAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "GoLambdaStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Parameters": {
+  "AssetParametersc9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6S3Bucket4FE1DEF4": {
+   "Type": "String",
+   "Description": "S3 bucket for asset \"c9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6\""
+  },
+  "AssetParametersc9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6S3VersionKey88AB4FDD": {
+   "Type": "String",
+   "Description": "S3 key for asset version \"c9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6\""
+  },
+  "AssetParametersc9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6ArtifactHash763B1F3A": {
+   "Type": "String",
+   "Description": "Artifact hash for asset \"c9c604aa2db1c73ee95e5f5f41cd3ec2c2643df1bc613f4f510e87b10c1a12d6\""
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
