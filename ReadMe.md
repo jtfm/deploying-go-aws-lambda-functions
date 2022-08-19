@@ -19,6 +19,7 @@ This repository serves as an example of how to correctly bundle and deploy a gol
 
 # Deployment
 
+1. Depending on which CDK language you prefer, remove the "python_" or "ts_" prefix from one of the cdk.json files.
 1. Ensure Docker Desktop is running in the background to enable your go module to be bundled within the bundling container.
 1. Run ```cdk synth``` and ensure that the resources you have defined in your app and stacks can create a cloudformation template.
 1. Run ```cdk deploy``` to create or update the resources in your stack.
